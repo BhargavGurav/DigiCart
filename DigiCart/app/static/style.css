@@ -1,0 +1,190 @@
+*{
+    padding: 0; margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+/* nav start  */
+.show{
+    text-align: center;
+}
+.show form{
+    justify-content: center;
+}
+#secondnav{
+    height: 90vh;
+}
+#secondnav .nav-item{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#searchfield{
+    width: 80%;
+    border-radius: 10px;
+}
+.list-unstyled li a{
+color: white;
+}
+.list-unstyled li a:hover{
+    color: rgba(241, 153, 20, 0.897);
+    transition-duration: .7s;
+}
+@media (max-width: 992px){
+    #secondnav{
+        display: none;
+    }
+   
+}
+/* nav end  */
+
+/* home start  */
+.sale{
+    font-family: cursive;
+}
+.discription{
+    display: none;
+}
+.itembox{
+    border: 2px solid black;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, .2);
+    backdrop-filter: blur(5px);
+}
+.itembox:hover{
+    box-shadow: 15px 15px solid gray;
+
+}
+.itembox h3, h4{
+    font-size: 16px;
+    font-weight: bold;
+}
+@media (max-width: 576px){
+    .carousel-item img{
+        height: 40vh !important;
+    }
+    
+   
+}
+/* home end  */
+
+/* footer start  */
+.links a{
+    text-decoration: none;
+    display: block;
+    color: whitesmoke;
+}
+.links a:hover{
+    text-decoration: underline;
+    color: rgba(223, 105, 8, 0.897);
+    transition-duration: .7s;
+
+}
+.footer-bar p{
+color: whitesmoke;
+}
+
+.icons a:hover{
+    color:rgba(222, 45, 89, 0.429);
+    transition-duration: .7s;
+}
+/* footer end  */
+
+/* register page  */
+.register-box{
+    background-image: linear-gradient(35deg, rgba(194, 206, 26, 0.5), rgba(157, 31, 174, 0.3));
+}
+.box{
+    background: transparent;
+    backdrop-filter: blur(10px);
+    border-radius: 7px;
+    background: rgba(247, 243, 243, 0.374);
+    box-shadow: 0 8px 16px 0 gray;
+    padding: 15px;
+}
+#registration .input-group-text{
+    font-weight: bold;
+}
+#registration .form-group{
+    margin: 2% 10%;
+}
+.side-label{
+    width: 150px;
+}
+.eye{
+    padding: .60rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+}
+/* register page  */
+
+/*-----------------------------------------
+            LOGIN
+-----------------------------------------*/
+#login-btn{
+    width: 130px;
+}
+.login-box{
+    background: transparent;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, .3);
+    border-radius: 7px;
+    box-shadow: 0 16px 32px 0 gray;
+}
+.login-container{
+    background-image: linear-gradient(35deg, rgba(23, 53, 141, 0.5), rgba(244, 151, 63, 0.3));
+}
+.login_input{
+    background-color: transparent !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid black;
+}
+.login_input:active{
+    background-color: transparent !important;
+    outline: none !important;
+}
+
+/*-----------------------------------------
+            PROFILE
+-----------------------------------------*/
+.profile-box{
+    background-image: linear-gradient(35deg, rgba(45, 159, 220, 0.5), rgba(160, 89, 23, 0.3));  
+}
+.profile-table{
+    background: transparent;
+    border-radius: 7px !important;
+    background: rgba(255, 255, 255, .6);
+    box-shadow: 0 8px 16px 0 gray;
+}
+.table-head{
+    box-shadow: 0 8px 16px 0 gray;
+}
+
+/*-----------------------------------------
+            CHECKOUT
+-----------------------------------------*/
+.item-checkout-box{
+    box-shadow: 0 8px 16px 0 gray;
+    border-radius: 10px;
+    background-color: white;
+}
+.item-checkout-box img{
+    height: 150px;
+    width: 150px;
+}
+.checkout-bg{
+    background-image: linear-gradient(35deg, rgba(74, 120, 40, 0.5), rgba(213, 169, 127, 0.3));  
+
+}
+.empty-box{
+    height: 15vh;
+}
+
+/*-----------------------------------------
+            Buy
+-----------------------------------------*/
+#online-pay{
+    display: none;
+}

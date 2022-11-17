@@ -1,0 +1,38 @@
+{% extends 'profile.html' %}
+
+{% block data2 %}
+<div class="container-fluid my-5">
+    <div class="row d-flex justify-content-center">
+        
+        {% if hist|length == 0 %}
+        <div class="col-sm-7">
+            <a href="{% url 'delete_history' %}" class="btn btn-outline-dark float-end disabled">Clear History</a>
+        </div>
+        <div class="d-flex justify-content-center align-items-center empty-box">
+            <h2 class="p-2 fw-bold">No orders placed yet.</h2>
+        </div>
+        {% else %}
+        <div class="col-sm-7">
+            <a href="{% url 'delete_history' %}" class="btn btn-outline-dark float-end">Clear History</a>
+        </div>
+        {% for i in hist %}
+        <div class="col-lg-7 col-md-8 col-sm-9 col-9 item-checkout-box mt-2 d-flex p-3">
+            <p class="fs-4">{{ i.item_name }}</p>
+            <p class="fs-4 ms-auto"><i class="fas fa-indian-rupee-sign"></i> {{ i.total_price }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var m = '{{ message }}';
+        swal('Perfect !', m, 'success');
+    </script>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endblock data2 %}

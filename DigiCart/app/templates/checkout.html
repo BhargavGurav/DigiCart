@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %} Cart {% endblock %}
+{% block nav-brand %}<i class="fas fa-cart-shopping fa-1x"></i> Cart {% endblock %}
+
+{% block nav_block %}
+<a href="{% url 'home' %}" class="btn btn-outline-warning mt-1 rounded-pill"><i class="fas fa-arrow-left"></i> Back</a>
+<a class="btn btn-danger text-light ms-lg-1 mt-1 rounded-pill" data-bs-toggle='modal' data-bs-target='#logoutmodal'>Logout</a>
+{% endblock %}
+
+{% block elseblock %}
+<li class="nav-item ms-3 mt-1">
+    <a href='/profile/{{ user.id }}' class="text-light"><i class="fas fa-user fa-2x"></i></a>
+</li>
+{% endblock %}
+
+{% block data2 %}
+
+<div class="container-fluid checkout-bg">
+    <div class="row d-flex justify-content-center py-5">
+        <div class="col-lg-8 col-md-9 col-sm-10">
+            {% if items|length == 0 %}
+                    <div class="d-flex justify-content-center align-items-center empty-box">
+                        <h2 class="p-2 fw-bold">Cart is empty.</h2>
+                    </div>
+            {% else %}
+                <p class="fs-4 text-center item-checkout-box py-3">Total amount : {{ total }} Rs</p>
+                    {% for i in items %}
+                        
+                        <div class="item-checkout-box border border-dark d-flex p-3 mt-lg-4 mt-md-2 mt-1" >
+                            <img src="../../media/{{ i.item_image}}" alt="" >
+                            <div class="information-box ms-lg-5 ms-md-3 ms-1">
+                                <h3 class="fw-bold">{{ i.item_name }}</h3>
+                                <p class="item_discription">{{ i.item_disc }}</p>
+                                <div class="d-flex">
+                                    <h4>{{ i.item_price }} Rs</h4>
+                                    <a href="/delete/{{i.id}}" class="ms-auto text-dark"><i class="fas fa-trash fa-2x"></i></a>
+                                </div>
+ 
+                            </div>
+                        </div>
+                        
+                    {% endfor %}
+                    <div class="d-grid mt-4">
+                        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#payment-modal">Checkout</button>
+                    </div>
+                {% endif %}
+            
+                <!-- <div class="d-grid">
+                    {% for i in items %}
+                        <form action="/buy/" method="get">{% csrf_token %}
+                            <input type="hidden" name="item_name" id="" value="{{ i.name }}">
+                            <input type="hidden" name="item_price" id="" value="{{ i.price }}">
+                        </form>
+                    {% endfor %}
+                </div> -->
+                
+
+                <!--********************payment modal*****************-->
+                <div class="modal" id="payment-modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h3 class="fw-bold modal-title">Payment</h3>
+                                <button class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" class="p-3 m-3">
+                                    <input type="text" placeholder="UPI ID" class="form-control mt-2">
+                                    <div class="input-group mt-2 mb-3">
+                                        <span class="input-group-text"><i class="fas fa-indian-rupee-sign"></i> </span>
+                                        <input type="text" class="form-control fw-bold" value="{{ total }}">
+                                    </div>
+                                    <div class="d-grid">
+                                        <a href="{% url 'save_cart_items' %}" class="btn btn-outline-primary">Pay</a>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
+
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                <script>
+                    var m = '{{ message }}';
+                    swal('Perfect !', m, 'success');
+                </script>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<script>
+  
+    
+</script>
+{% endblock data2 %}
+
+

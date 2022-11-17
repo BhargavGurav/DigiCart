@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %} Profile {% endblock title %}
+{% block nav-brand %}<i class="fas fa-user fa-1x"></i> {{ user.first_name}} {{ user.last_name }} {% endblock %}
+
+{% block nav_block %}
+<a href="{% url 'home' %}" class="btn btn-outline-warning mt-1 rounded-pill"><i class="fas fa-arrow-left"></i> Back</a>
+<a class="btn btn-danger text-light ms-lg-1 mt-1 rounded-pill" data-bs-toggle='modal' data-bs-target='#logoutmodal'>Logout</a>
+{% endblock %}
+
+{% block cart %}
+<li class="nav-item">
+  <a class="nav-link fs-5 text-light" href="{% url 'checkout' %}">Cart<i class="fa-solid fa-cart-shopping"></i></a>
+</li>
+{% endblock %}
+
+{% block data2 %}
+<div class="container-fluid profile-box">
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-5 col-md-6 col-sm-7 my-5 fs-5">
+            <div class="col-12 btn btn-dark mb-3 fs-4 table-head" data-aos="flip-up" data-aos-duration="500" data-aos-easing="ease-in-sine"><i class="fas fa-user"></i> Your details</div>
+            
+            <table class="table table-striped  profile-table fw-bold " data-aos="flip-down" data-aos-duration="500" data-aos-easing="ease-in-sine">
+                <tr>
+                    <td>Name</td>
+                    <td>{{ user.first_name  }} {{ user.last_name }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <td>Phone no.</td>
+                    <td>{{ customer.phone }}</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>{{ customer.gender }}</td>
+                </tr>
+                <tr>
+                    <td>DOB</td>
+                    <td>{{ customer.dob }}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>{{ customer.address }}</td>
+                </tr>
+                <tr>
+                    <td>Order history</td>
+                    <td><a href="{% url 'history_page' %}" class="btn btn-info w-25">Check</a></td>
+                </tr>
+            </table>
+        
+        </div>
+    </div>
+</div>
+
+{% endblock data2 %}
+

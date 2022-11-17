@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %} Checkout {% endblock %}
+{% block nav-brand %}<i class="fas fa-cart-shopping fa-1x"></i> Buy {% endblock %}
+
+{% block elseblock %}
+<li class="nav-item ms-3 mt-1">
+    <a href='/profile/{{ user.id }}' class="text-light"><i class="fas fa-user fa-2x"></i></a>
+</li>
+{% endblock %}
+
+{% block nav_block %}
+<a href="{% url 'home' %}" class="btn btn-outline-warning mt-1 rounded-pill"><i class="fas fa-arrow-left"></i> Back</a>
+<a class="btn btn-danger text-light ms-lg-1 mt-1 rounded-pill" data-bs-toggle='modal' data-bs-target='#logoutmodal'>Logout</a>
+{% endblock %}
+
+{% block data2 %}
+<div class="container-fluid my-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-5 col-md-6 col-sm-7 col-8">
+            <div class="d-grid">
+                <button class="btn btn-dark"><i class="fas fa-indian-rupee-sign"></i> Amount to pay : {{ price }}</button>
+            </div>
+            <div class="col-12 item-checkout-box my-2 d-flex p-3">
+                <p class="fs-5">{{ name }}</p>
+                <p class="fs-5 ms-auto"><i class="fas fa-indian-rupee-sign"></i> {{ price }}</p>
+            </div>
+            
+            <div class="d-flex mt-3">
+                <button class="btn btn-info rounded-pill" onclick="pay()">Online payment</button>
+                
+               
+                <form action="/history/" method="post">{% csrf_token %}
+                    <input type="hidden" name="name" value="{{ name }}">
+                    <input type="hidden" name="price" value="{{ price }}">
+                    <input class="btn btn-primary ms-auto rounded-pill" type="submit" value="Cash on Delivery">
+                </form>
+            </div>
+            <div class="my-3 item-checkout-box p-5" id="online-pay">
+                <form action="/history/" method="post" >{% csrf_token %}
+                    <input type="text" class="form-control login_input" placeholder="UPI ID">
+                    <input type="hidden" name="name" value="{{ name }}">
+                    <input type="hidden" name="price" value="{{ price }}">
+                    <input class="btn btn-primary ms-auto mt-2" type="submit" value="Pay">
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var m = '{{ message }}';
+        swal('Perfect !', m, 'success');
+    </script>
+{% endif %}
+{% endfor %}
+<script>
+    function pay(){
+        document.getElementById('online-pay').style.display = 'block';
+    }
+</script>
+{% endblock data2 %}

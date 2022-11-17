@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block elseblock %}
+<li class="nav-item ms-3 mt-1">
+    <a href='/profile/{{ user.id }}' class="text-light"><i class="fas fa-user fa-2x"></i></a>
+</li>
+{% endblock %}
+
+
+  {% block cart %}
+  <li class="nav-item">
+    <a class="nav-link fs-5 text-light" href="{% url 'checkout' %}">Cart<i class="fa-solid fa-cart-shopping"></i></a>
+  </li>
+  {% endblock %}
+
+
+{% block data1 %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-1" id="secondnav">
+  <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContents" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContents">
+          <ul class="list-unstyled">
+              <li class="nav-item">
+                  <a class="fs-4 text-decoration-none" href="#Mobiles">
+                    Mobiles
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="fs-4 text-decoration-none" href="#Laptops">
+                    Laptops
+                  </a>
+         
+              </li>
+              <li class="nav-item">
+                  <a class="fs-4 text-decoration-none" href="#Men">
+                    Men
+                  </a>
+             
+              </li>
+              <li class="nav-item">
+                  <a class="fs-4 text-decoration-none" href="#Women">
+                    Women
+                  </a>
+                
+              </li>
+              <li class="nav-item">
+                  <a class="fs-4 text-decoration-none" href="#Kids">
+                    Kids
+                  </a>
+              
+              </li>
+              <li class="nav-item">
+                <a class="fs-4 text-decoration-none" href="#Watches">
+                  Watches
+                </a>
+            </li>
+            <li class="nav-item">
+              <a class="fs-4 text-decoration-none" href="#Footwear">
+                Footwear
+              </a>
+          </li>
+              <li class="nav-item">
+                  <a class="fs-4 text-decoration-none" href="#Home">
+                    Home
+                  </a>
+                 
+              </li>
+              <li class="nav-item">
+                  <a class="fs-4 text-decoration-none" href="#Grocery">
+                    Grocery
+                  </a>
+               
+              </li>
+          </ul>
+      </div>
+      
+  </div>
+</nav>
+{% endblock %}
+{% block data %}
+
+        <div class="col-lg-12 border border-4 px-0">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="{% static 'images/super_sale.jpg' %}" style="width: 100%; height: 90vh;" class="d-block" alt="...">
+                   
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{% static 'images/pic2.jpg' %}" style="width: 100%; height: 90vh;" class="d-block" alt="...">
+                    
+                  </div>
+                  <div class="carousel-item">
+                    <img src="{% static 'images/pic3.webp' %}" style="width: 100%; height: 90vh;" class="d-block" alt="...">
+                   
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+{% endblock data %}
+{% block data2 %}
+<div class="container-fluid">
+    <div class="row d-flex justify-content-around">
+        <div class="col-lg-12 bg-warning text-center p-4 text-light">
+          <p class="fs-1 fw-bold sale">Big sale on everything</p>
+          <p class="fs-3 fw-bold sale">Do shop now, offers are for limited period</p>
+        </div>
+ 
+<!-- items section  -->
+{% for k, j in data.items %}
+    <div class="col-lg-12 text-center p-2" id="{{k}}">
+      <p class="fs-1 fw-bold sale mt-5">{{k}}</p>
+    </div>
+        {% for i in j %}
+        
+        <div class="col-md-4 col-lg-3 col-sm-6">
+          <div class="m-2 p-3 itembox image" data-aos='flip-right' data-aos-duration='1000' data-aos-easing='ease-in-sine'>
+            <div class="d-flex justify-content-center">
+            <img src="../media/{{i.image}}" alt="" height="300px" width="70%" class="mb-3">
+            </div>
+            <div class="total  text-dark p-2">
+            <h3>{{i.name}}</h3>
+            <h4>Rs {{i.price}} </h4>
+            <p class="discription">{{i.discription}}</p>
+            
+              <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="item_category" value="{{ k }}">
+                <input type="hidden" name="item_name" id="" value="{{ i.name }}">
+                <input type="hidden" name="item_price" id="" value="{{ i.price }}">
+                <input type="hidden" name="item_disc" id="" value="{{ i.discription }}">
+                {% if not user.is_authenticated %}
+                <div class="d-grid gap-2">
+                  <a type="submit" class="btn btn-warning"  href="{% url 'loginuser' %}">Add to cart</a>
+                  <a type="submit" class="btn btn-success"  href="{% url 'loginuser' %}">Buy Now</a>
+                </div>
+                {% else %}
+                <div class="d-grid gap-2">
+                  <input type="submit" class="btn btn-warning" value="Add to cart">
+                </div>
+                {% endif %}
+              </form>
+              {% if user.is_authenticated %}
+              <form action="/buy/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="item_category" value="{{ k }}">
+                <input type="hidden" name="item_name" id="" value="{{ i.name }}">
+                <input type="hidden" name="item_price" id="" value="{{ i.price }}">
+                <input type="hidden" name="item_disc" id="" value="{{ i.discription }}">
+                <div class="d-grid mt-2">
+                  <input type="submit" class="btn btn-success" value="Buy now">
+                </div>
+              </form>
+              {% endif %}
+          
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    {% endfor %}
+    <!-- <button class="btn btn-success ">Buy now</button> -->
+
+<!-- items section end  -->
+
+  
+
+  {% for message in messages %}
+    {% if message.tags == 'success' %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = '{{ message }}';
+            swal('Perfect !', m, 'success');
+        </script>
+    {% endif %}
+ {% endfor %}
+</div>
+</div>
+
+
+
+
+
+<script>
+  let img = document.getElementsByClassName('image');
+  let dis = document.getElementsByClassName('discription');
+  for(let i=0; i<img.length; i++){
+    img[i].addEventListener('click', function(){
+      dis[i].style.display='block';
+      
+    })
+    img[i].addEventListener('mouseout', function(){
+      dis[i].style.display='none';
+    })
+  }
+  
+ 
+</script>
+{% endblock data2 %}

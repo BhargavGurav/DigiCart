@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock title %}
+
+{% block nav_block %}
+<a href="{% url 'home' %}" class="btn btn-outline-warning mt-1"><i class="fas fa-arrow-left"></i> Back</a>
+{% endblock %}
+
+{% block data2 %}
+<div class="container-fluid login-container">
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4 col-sm-8 p-4  m-5 login-box border border-dark"> 
+            <div class="col-12 btn btn-outline-dark p-2"><i class="fas fa-lock"></i>&nbsp; Login</div>
+            <form action="" method="post" class="border border-dark mt-3 px-5 py-3" autocomplete="off">
+                {% csrf_token %}
+                <div class="form-group mt-4 mb-3">
+                    <label class="fw-bold">Username</label>
+                    <input type="email" name="username" class="form-control login_input" id="" placeholder='Email-ID'>
+                </div>
+                <div class="form-group mt-4 mb-3">
+                    <label class="fw-bold">Password</label>
+                    <input type="password" name="password" class="form-control login_input" id="">
+                </div>
+                <div class="input-group mt-4 mb-3 d-flex justify-content-center">
+                    <input type="submit" value="Login" class="btn btn-primary" id="login-btn">
+                </div>
+
+                <div class="my-3 d-flex justify-content-center">
+                    <a class="btn btn-outline-dark" href="{% url 'register' %}">new user ? Register </a>
+                </div>
+
+            </form>
+        </div>
+        {% if messages %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        
+            <script>
+                var m = '{{ message }}';
+                swal('Perfect !', m, 'success');
+            </script>
+        {% elif message.tags == 'error' %}
+        
+            <script>
+                var m = '{{ message }}';
+                swal('Denied !', m, 'error');
+            </script>
+        {% endif %}
+     {% endfor %} 
+     {% endif %}
+
+    </div>
+</div> 
+{% endblock data2 %}
